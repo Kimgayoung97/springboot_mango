@@ -21,11 +21,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	//form로그인
 	@Override
 	public UserDetails loadUserByUsername(String uid) throws UsernameNotFoundException {
 		return loadUserByUsername("mango", uid);
 	}
 
+	//form로그인 & 소셜 로그인 사용
 	public UserDetails loadUserByUsername(String provider, String uid) throws UsernameNotFoundException {
 		UserEntity p = new UserEntity();
 		p.setProvider(provider);
@@ -37,6 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return new UserPrincipal(ue);
 	}
 	
+	//소셜로그인, 폼로그인 함께 씁니다
 	public int join(UserEntity p) {
 		if(p.getUpw() != null && !"".equals(p.getUpw())) {
 			p.setUpw(encoder.encode(p.getUpw())); 

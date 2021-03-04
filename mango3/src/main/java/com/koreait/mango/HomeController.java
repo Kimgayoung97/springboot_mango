@@ -4,6 +4,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.koreait.mango.model.UserEntity;
@@ -21,8 +22,8 @@ public class HomeController {
 	final HomeService service;
 	
 	@GetMapping("/")
-	public String home() {
-		return "home";
+	public String index() {
+		return "index";
 	}
 		
 	@GetMapping("/home")
@@ -36,7 +37,9 @@ public class HomeController {
 	public void denied() {}
 	
 	@GetMapping("/login")
-	public void login() {}
+	public void login(@ModelAttribute("userEntity") UserEntity userEntity) {
+		userEntity.setUid("admin2");
+	}
 	
 	@GetMapping("/join")
 	public void join() {}

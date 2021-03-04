@@ -31,7 +31,7 @@ public class UserPrincipal extends UserEntity implements OAuth2User, UserDetails
     	authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getAuth()));
     }
     
-    public static UserPrincipal create(UserEntity user,  Map<String, Object> attributes) {
+    public static UserPrincipal create(UserEntity user, Map<String, Object> attributes) {
     	 UserPrincipal userPrincipal = UserPrincipal.create(user);
          userPrincipal.setAttributes(attributes);
          return userPrincipal;
