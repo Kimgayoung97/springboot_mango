@@ -1,16 +1,14 @@
 package com.koreait.mango;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.koreait.mango.model.UserEntity;
-
 import com.koreait.mango.security.CurrentUser;
-import com.koreait.mango.security.UserDetailsServiceImpl;
 import com.koreait.mango.security.model.UserPrincipal;
 
 import lombok.RequiredArgsConstructor;
@@ -22,25 +20,24 @@ public class HomeController {
 	final HomeService service;
 	
 	@GetMapping("/")
-	public String index() {
+	public String home() {
 		return "index";
 	}
 		
 	@GetMapping("/home")
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	public void home(@CurrentUser UserPrincipal userPrincipal) {
-		System.out.println("userPk : " + userPrincipal.getUserPk());
+	public void home2() {		
 		service.home();
 	}
 	
 	@GetMapping("/denied")
 	public void denied() {}
-	
+
 	@GetMapping("/login")
 	public void login(@ModelAttribute("userEntity") UserEntity userEntity) {
-		userEntity.setUid("admin2");
+		userEntity.setUid("admin");
 	}
-	
+
 	@GetMapping("/join")
 	public void join() {}
 	

@@ -77,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.formLogin()
 			.loginPage("/login")
+			.usernameParameter("uid")
+            .passwordParameter("upw")
 			.defaultSuccessUrl("/home");
 		
 		http.logout()
